@@ -27,7 +27,7 @@ abstract class _AppThemeControllerBase with Store {
     if (_themeMode != null) {
       return _themeMode!;
     } else {
-      return ThemeMode.light;
+      return ThemeMode.system;
     }
   }
 
@@ -38,7 +38,7 @@ abstract class _AppThemeControllerBase with Store {
     if (themeMode != null) {
       saveThemeMode(themeMode);
     } else {
-      saveThemeMode(ThemeMode.light);
+      saveThemeMode(ThemeMode.system);
     }
   }
 

@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' show Client;
-import 'package:split_it_ignite/domain/example/model/example_model.dart';
+import '/domain/example/model/example_model.dart';
 
 import '../../../core/core.dart';
 

@@ -1,3 +1,5 @@
+// ARQUIVO PARA EXPORTAR TODOS OS ARQUIVOS DO CORE
+
 export 'app_widget.dart';
 
 export './theme/app_colors.dart';

@@ -1,4 +1,4 @@
-import 'package:split_it_ignite/modules/splash/splash_page.dart';
+import '/modules/splash/splash_page.dart';
 
 import '/core/core.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +20,8 @@ class _AppConfigPageState extends State<AppConfigPage> {
 
   @override
   void initState() {
-    _initialize = _controllerConfig.controllerAppTheme.currentThemeMode();
+    // INICIALIZA TODAS AS CONFIGURAÇÕES DO APP
+    _initialize = _controllerConfig.initialConfiguration();
     super.initState();
   }
 
@@ -35,7 +36,7 @@ class _AppConfigPageState extends State<AppConfigPage> {
           return const Material(
             child: Center(
               child: Text(
-                "Não foi possível inicializar o Shared Preferences",
+                "Não foi possível inicializar as configurações do APP",
                 textDirection: TextDirection.ltr,
               ),
             ),
@@ -44,16 +45,18 @@ class _AppConfigPageState extends State<AppConfigPage> {
         // VERIFICA SE RETORNOU COMPLETOU A FUNÇÃO NA FUNÇÃO FUTURE
         // E MANDA PARA PROXIMA ROTA
         if (snapshot.connectionState == ConnectionState.done) {
-          WidgetsBinding.instance?.addPostFrameCallback((_) {
-            Navigator.pushNamedAndRemoveUntil(
-                context, RouterClass.splash, (Route<dynamic> route) => false);
-          });
+          if (_controllerConfig.appInicialized) {
+            _controllerConfig.appInicialized = false;
+            return SplashPage(
+              redirect: true,
+              key: UniqueKey(),
+            );
+          }
         }
         // ENQUANTO ESTÁ EM ESTADO DE LOADING NA FUNÇÃO FUTURE
-        return const Material(
-          child: Center(
-            child: SplashPage(redirect: false),
-          ),
+        return SplashPage(
+          redirect: false,
+          key: UniqueKey(),
         );
       },
     );

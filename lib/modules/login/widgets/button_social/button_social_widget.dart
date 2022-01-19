@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:split_it_ignite/core/core.dart';
+import '/core/core.dart';
 
 class ButtonSocialWidget extends StatefulWidget {
   final String? imagePath;
@@ -58,8 +58,10 @@ class _ButtonSocialWidgetState extends State<ButtonSocialWidget> {
       onTap: widget.onTap,
       child: IntrinsicHeight(
         child: Container(
-          decoration:
-              BoxDecoration(border: Border.all(color: AppTheme.colors.border)),
+          decoration: BoxDecoration(
+            border: Border.all(color: AppTheme.colors.border),
+            borderRadius: BorderRadius.circular(5),
+          ),
           child: Row(
             children: [
               Padding(

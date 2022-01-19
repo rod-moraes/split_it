@@ -13,6 +13,7 @@ abstract class AppTextStyles {
   TextStyle get payableText;
   TextStyle get subtitleMoney;
   TextStyle get textSimple;
+  TextStyle get textSnackBar;
   TextStyle get textSimpleSemiBold;
   TextStyle get textSimpleBold;
   TextStyle get textSimpleOpacity;
@@ -26,6 +27,7 @@ abstract class AppTextStyles {
   TextStyle get headerText;
   TextStyle get headerTextContrast;
   TextStyle get appBarTitle;
+  TextStyle get appBarTitleGradient;
   TextStyle get titleGroup;
 }
 
@@ -46,6 +48,13 @@ class AppTextStylesDefault implements AppTextStyles {
         fontWeight: FontWeight.w700,
         height: 27 / 22,
         color: AppTheme.colors.textBold,
+      );
+
+  @override
+  TextStyle get appBarTitleGradient => GoogleFonts.montserrat(
+        fontSize: 24,
+        fontWeight: FontWeight.w700,
+        color: AppTheme.colors.textGradient,
       );
 
   @override
@@ -165,6 +174,14 @@ class AppTextStylesDefault implements AppTextStyles {
         fontWeight: FontWeight.w600,
         height: 19 / 16,
         color: AppTheme.colors.textBold,
+      );
+
+  @override
+  TextStyle get textSnackBar => GoogleFonts.inter(
+        fontSize: 16,
+        fontWeight: FontWeight.w600,
+        height: 19 / 16,
+        color: Colors.white,
       );
 
   @override

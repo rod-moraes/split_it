@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:split_it_ignite/core/core.dart';
+import '/core/core.dart';
 import 'package:sizer/sizer.dart';
-import 'package:split_it_ignite/modules/splash/splash_controller.dart';
+import '/modules/splash/splash_controller.dart';
 
 import 'widgets/box_gradient_widget.dart';
 
@@ -22,6 +22,7 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   void initState() {
+    // REDIRECIONAMENTO PARA LOGIN-PAGE
     if (widget.redirect) splashController.redirectSplash(context);
     super.initState();
   }

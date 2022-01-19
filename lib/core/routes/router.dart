@@ -1,31 +1,45 @@
 import 'package:flutter/material.dart';
-import 'package:split_it_ignite/core/config/app_config_page.dart';
-import 'package:split_it_ignite/modules/splash/splash_page.dart';
-import 'package:split_it_ignite/modules/login/login_page.dart';
+import 'package:split_it_ignite/domain/login/model/user_model.dart';
+import 'package:split_it_ignite/modules/home/home_page.dart';
+import '/core/config/app_config_page.dart';
+import '/modules/splash/splash_page.dart';
+import '/modules/login/login_page.dart';
 
+// CLASSE COM TODA REGRA DAS ROTAS DO APLICATIVO
 class RouterClass {
-  //STRINGS DAS ROTAS
+  // STRINGS DAS ROTAS
   static const String initial = "/";
   static const String splash = "/splash";
   static const String login = "/login";
+  static const String home = "/home";
 
-  //FUNÇÃO DE GERAÇÃO DE ROTAS
+  // FUNÇÃO DE GERAÇÃO DE ROTAS
   static Route<dynamic> generateRoute(RouteSettings settings) {
     // Map<String, dynamic> arguments = settings.arguments as Map<String, dynamic>;
-    //PROCURA A ROTA
+    // PROCURA A ROTA
     switch (settings.name) {
-      //ROTA DA SPLASH
+      // ROTA DA SPLASH
       case splash:
-        return MaterialPageRoute(builder: (_) => SplashPage(redirect: true));
+        return MaterialPageRoute(
+            builder: (_) => const SplashPage(redirect: true));
 
+      // ROTA PARA FAZER O LOGIN
       case login:
         return MaterialPageRoute(builder: (_) => const LoginPage());
 
-      //ROTA COM INICIAL DE CONFIGURAÇÕES
+      // ROTA PARA DO HOME
+      case home:
+        UserModel user = settings.arguments as UserModel;
+        return MaterialPageRoute(
+            builder: (_) => HomePage(
+                  user: user,
+                ));
+
+      // ROTA COM INICIAL DE CONFIGURAÇÕES
       case initial:
         return MaterialPageRoute(builder: (_) => const AppConfigPage());
 
-      //ROTA CASO NÃO ACHE ROTA
+      // ROTA CASO NÃO ACHE ROTA
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

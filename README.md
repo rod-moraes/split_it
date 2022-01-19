@@ -1,4 +1,4 @@
-# split_it_ignite
+# split_it_rocketseat
 
 A new Flutter project.
 

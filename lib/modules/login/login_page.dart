@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:split_it_ignite/core/core.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx/mobx.dart';
+import 'package:split_it_ignite/modules/login/login_state.dart';
+import '/core/core.dart';
 
+import 'login_controller.dart';
 import 'widgets/button_social/button_social_widget.dart';
 
 class LoginPage extends StatefulWidget {
@@ -11,6 +15,13 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final LoginController _loginController = LoginController();
+  @override
+  void initState() {
+    _loginController.autoRun(context);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,36 +55,31 @@ class _LoginPageState extends State<LoginPage> {
                             .copyWith(height: 26 / 16)),
                   ),
                 ),
-                // Row(children: [
-                //   Image.asset(
-                //     AppTheme.images.emoji,
-                //     height: 36,
-                //   ),
-                //   const SizedBox(width: 22),
-                //   Flexible(
-                //     child: SizedBox(
-                //         width: 174,
-                //         child: Text("Faça seu login com uma das contas abaixo",
-                //             style: AppTheme.textStyles.textSimple
-                //                 .copyWith(height: 26 / 16))),
-                //   ),
-                // ]),
                 const SizedBox(height: 32),
-                ButtonSocialWidget(
-                  text: "Entrar com Google",
-                  imagePath: AppTheme.images.iconGoogle,
-                  onTap: () {
-                    print("Google");
-                  },
-                ),
-                const SizedBox(height: 12),
-                ButtonSocialWidget(
-                  text: "Entrar com Apple",
-                  imagePath: AppTheme.images.iconApple,
-                  onTap: () {
-                    print("Apple");
-                  },
-                ),
+                Observer(builder: (context) {
+                  if (_loginController.loginState is LoginStateLoading) {
+                    return const SizedBox(
+                        height: 128,
+                        child: Center(child: CircularProgressIndicator()));
+                  }
+                  return Column(
+                    children: [
+                      ButtonSocialWidget(
+                        text: "Entrar com Google",
+                        imagePath: AppTheme.images.iconGoogle,
+                        onTap: () => _loginController.googleSignIn(),
+                      ),
+                      const SizedBox(height: 12),
+                      ButtonSocialWidget(
+                        text: "Entrar com Apple",
+                        imagePath: AppTheme.images.iconApple,
+                        onTap: () {
+                          print("Apple");
+                        },
+                      ),
+                    ],
+                  );
+                }),
               ],
             ),
           ],
@@ -82,3 +88,18 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
+
+// Row(children: [
+//   Image.asset(
+//     AppTheme.images.emoji,
+//     height: 36,
+//   ),
+//   const SizedBox(width: 22),
+//   Flexible(
+//     child: SizedBox(
+//         width: 174,
+//         child: Text("Faça seu login com uma das contas abaixo",
+//             style: AppTheme.textStyles.textSimple
+//                 .copyWith(height: 26 / 16))),
+//   ),
+// ]),

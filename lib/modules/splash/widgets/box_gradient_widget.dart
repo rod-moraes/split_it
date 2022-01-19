@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:split_it_ignite/core/core.dart';
+import '/core/core.dart';
 
 class BoxGradientWidget extends StatelessWidget {
   final double width;
